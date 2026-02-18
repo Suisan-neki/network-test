@@ -1,0 +1,7 @@
+WAN_IF: wlan0
+LAN_IF: eth0
+PING_IP: 8.8.8.8
+PING_DNS: google.com
+PORT: 5000
+REFRESH: 5
+

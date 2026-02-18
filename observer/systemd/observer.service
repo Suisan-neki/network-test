@@ -1,0 +1,17 @@
+[Unit]
+Description=Network Observer Dashboard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/opt/network-test
+ExecStart=/usr/bin/python3 -m observer.app
+Restart=always
+RestartSec=2
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
