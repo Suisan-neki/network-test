@@ -7,11 +7,12 @@ Wants=network-online.target
 Type=simple
 User=pi
 Group=pi
-WorkingDirectory=/opt/network-test
+WorkingDirectory=/home/pi/network-test
 ExecStart=/usr/bin/python3 -m observer.app
 Restart=always
 RestartSec=2
 Environment=PYTHONUNBUFFERED=1
+Environment=OBSERVER_CONFIG=/home/pi/network-test/observer/config.yaml
 
 [Install]
 WantedBy=multi-user.target

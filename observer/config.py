@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
     "LAN_IF": "eth0",
     "PING_IP": "8.8.8.8",
     "PING_DNS": "google.com",
+    "DHCP_LEASE_FILE": "auto",
     "PORT": 5000,
     "REFRESH": 5,
 }
@@ -43,4 +44,3 @@ def load_config(config_path: str | None = None) -> dict[str, Any]:
     config["PORT"] = _coerce_int(config.get("PORT"), DEFAULT_CONFIG["PORT"])
     config["REFRESH"] = _coerce_int(config.get("REFRESH"), DEFAULT_CONFIG["REFRESH"])
     return config
-

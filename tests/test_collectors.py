@@ -1,5 +1,5 @@
 from observer.collectors.command import CommandResult
-from observer.collectors.dhcp import parse_dhcp_leases
+from observer.collectors.dhcp import parse_dhcp_leases, parse_dnsmasq_leases
 from observer.collectors.interfaces import collect_interface_status, parse_default_route
 from observer.collectors.nat import parse_nat_postrouting
 
@@ -63,3 +63,12 @@ def test_collect_interface_status_no_crash_on_command_error():
     assert result["default_route"] == {}
     assert result["errors"]
 
+
+def test_parse_dnsmasq_leases():
+    content = "1739869200 aa:bb:cc:dd:ee:01 192.168.50.20 laptop-01 01:aa:bb\n"
+    leases = parse_dnsmasq_leases(content)
+    assert len(leases) == 1
+    assert leases[0]["ip"] == "192.168.50.20"
+    assert leases[0]["mac"] == "aa:bb:cc:dd:ee:01"
+    assert leases[0]["hostname"] == "laptop-01"
+    assert leases[0]["state"] == "active"

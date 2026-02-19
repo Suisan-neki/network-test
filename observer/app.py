@@ -50,7 +50,8 @@ def create_app(config_path: str | None = None) -> Flask:
 
     @app.get("/api/dhcp_leases")
     def api_dhcp_leases():
-        return jsonify(collect_dhcp_leases())
+        cfg = app.config["OBSERVER"]
+        return jsonify(collect_dhcp_leases(cfg.get("DHCP_LEASE_FILE", "auto")))
 
     @app.get("/api/logs")
     def api_logs():
@@ -63,4 +64,3 @@ if __name__ == "__main__":
     app = create_app()
     cfg = app.config["OBSERVER"]
     app.run(host="0.0.0.0", port=int(cfg["PORT"]))
-

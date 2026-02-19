@@ -31,6 +31,11 @@ python3 -m observer.app
 
 デフォルトは `0.0.0.0:5000` で待ち受けます。
 
+`DHCP_LEASE_FILE` は既定で `auto` です。以下を順に探して読み取ります。
+
+- `/var/lib/dhcp/dhcpd.leases` (isc-dhcp-server)
+- `/var/lib/misc/dnsmasq.leases` (dnsmasq)
+
 ## API
 
 - `GET /api/status`
@@ -45,4 +50,10 @@ pytest -q
 
 ## systemd
 
-`observer/systemd/observer.service` をベースに `WorkingDirectory` / `ExecStart` / `User` を環境に合わせて調整してください。
+`observer/systemd/observer.service` は Raspberry Pi を想定して以下を既定にしています。
+
+- `User=pi`
+- `WorkingDirectory=/home/pi/network-test`
+- `OBSERVER_CONFIG=/home/pi/network-test/observer/config.yaml`
+
+必要に応じてパスだけ調整してください。
